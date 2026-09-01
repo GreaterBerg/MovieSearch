@@ -4,9 +4,11 @@
 @import "@fontsource-variable/geist";
 
 :root {
-  --text: #b4c3cd;
+  --text: #ebf7ff;
+  --text-g: #cccccc;
   --text-h: #0F4C75;
   --bg: #1B262C;
+  --bg-subtle: #0F4C75;
   --border: #3282B8;
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
