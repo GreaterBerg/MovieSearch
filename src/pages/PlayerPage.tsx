@@ -5,6 +5,10 @@ const PlayerPage = () => {
 
     const { movieId } = useParams();
 
+    if (!movieId) {
+        return <div>Фильм не найден</div>; // или редирект, или заглушка
+    }
+
     return (
         <div>
             <section className="m-4">
