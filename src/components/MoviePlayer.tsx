@@ -1,9 +1,14 @@
 import { useEffect, useRef } from "react";
 
-const MoviePlayer = ({movieImdbId}) => {
-    const hostRef = useRef(null);
+interface MoviePlayerProps {
+  movieImdbId: string;
+}
+
+const MoviePlayer = ({movieImdbId}: MoviePlayerProps) => {
+    const hostRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
+        if (!hostRef.current) return;
         const container = document.createElement("div");
         container.id = "kinobd";
         container.dataset.imdb = movieImdbId;
