@@ -15,9 +15,11 @@ const SearchPage = () => {
     const [ search, setSearch ] = useState("");
     const debouncedSearch = useDebounce(search, 500);
 
+    const [ page, setPage ] = useState(1);
+
     const { data, isLoading, error } = useQuery({
-        queryKey: ["search", debouncedSearch],
-        queryFn: () => fetchFn(`https://kinobd.net/api/player/search?q=${debouncedSearch}`),
+        queryKey: ["search", debouncedSearch, page],
+        queryFn: () => fetchFn(`https://kinobd.net/api/player/search?q=${debouncedSearch}&page=${page}`),
         enabled: debouncedSearch.trim().length >= 3
     })
 
@@ -50,9 +52,9 @@ const SearchPage = () => {
                         <p className="text-center text-[var(--text-g)]">Ничего не найдено</p>
                     ) : uniqueData.map((item: any) => {
                         return (
-                            <div key={item.id} className="flex w-120 gap-4 items-start p-4 border border-[var(--border)] rounded my-4 hover:bg-[var(--bg-subtle)] transition-colors ">
+                            <div key={item.id} className="flex align-center justify-center w-120 h-30 gap-4 items-start border border-[var(--border)] rounded my-4 hover:bg-[var(--bg-subtle)] transition-colors ">
                                 <div
-                                    className={`w-16 h-25 rounded-md ${!item.small_poster ? 'bg-muted' : ''}`}
+                                    className={`w-20 h-25 m-2 rounded-md ${!item.small_poster ? 'bg-muted' : ''}`}
                                     style={item.small_poster ? { backgroundImage: `url(${item.small_poster})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
                                 />
                                 <div className="w-full h-full flex flex-col justify-center align-center">
@@ -64,6 +66,13 @@ const SearchPage = () => {
                         )
                     })}
                 </div>
+                { data && data?.last_page !== 1 && (
+                    <button
+                        onClick={() => setPage((prev) => prev + 1)}
+                        className="m-4 bg-[var(--bg-subtle)] text-[var(--text)] hover:bg-[var(--bg)] border border-[var(--border)] px-4 py-2 rounded-md transition-colors">
+                        некст
+                    </button>
+                )}
             </section>
         </div>
     )
