@@ -33,6 +33,7 @@ const SearchPage = () => {
             <InputGroup className="my-10 w-110 mx-[auto] text-[var(--text)]">
                 <InputGroupInput
                     autoFocus
+                    autoComplete="off"
                     id="inline-start-input"
                     placeholder="Поиск..."
                     value={search}
