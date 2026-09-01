@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query"
 import useDebounce from "../hooks/useDebounce"
 import fetchFn from "../fetchFn"
 import { Skeleton } from "../components/ui/skeleton"
+import { Link } from "react-router-dom"
 
 const SearchPage = () => {
 
@@ -52,7 +53,7 @@ const SearchPage = () => {
                         <p className="text-center text-[var(--text-g)]">Ничего не найдено</p>
                     ) : uniqueData.map((item: any) => {
                         return (
-                            <div key={item.id} className="flex align-center justify-center w-120 h-30 gap-4 items-start border border-[var(--border)] rounded my-4 hover:bg-[var(--bg-subtle)] transition-colors ">
+                            <Link to={`/player/${item.imdb_id}`} key={item.id} className="flex align-center justify-center w-120 h-30 gap-4 items-start border border-[var(--border)] rounded my-4 hover:bg-[var(--bg-subtle)] transition-colors ">
                                 <div
                                     className={`w-20 h-25 m-2 rounded-md ${!item.small_poster ? 'bg-muted' : ''}`}
                                     style={item.small_poster ? { backgroundImage: `url(${item.small_poster})`, backgroundSize: 'cover', backgroundPosition: 'center' } : undefined}
@@ -62,7 +63,7 @@ const SearchPage = () => {
                                     <p className="text-sm text-[var(--text-g)]">ru: {item.name_russian}</p>
                                     <p className="text-sm text-[var(--text-g)]">время: {item.time} ч.</p>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     })}
                 </div>
