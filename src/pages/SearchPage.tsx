@@ -8,7 +8,6 @@ import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import useDebounce from "../hooks/useDebounce"
 import fetchFn from "../fetchFn"
-import { Skeleton } from "../components/ui/skeleton"
 import { Link } from "react-router-dom"
 
 const SearchPage = () => {
@@ -46,9 +45,9 @@ const SearchPage = () => {
             <section>
                 <p className="text-start p-4 text-sm text-[var(--text-g)]">Результаты поиска:</p>
                 <div className="flex gap-4 flex-wrap">
-                    { isLoading ? Array.from({length: 20}).map((_, i) => {
-                        return <Skeleton key={i} className="h-50 w-25"/>
-                    }) : error ? (
+                    { isLoading ? (
+                        <p className="text-center text-[var(--text-g)]">Загрузка...</p>
+                    ) : error ? (
                         <p className="text-center text-[var(--text-g)]">Произошла ошибка при поиске</p>
                     ) : data?.data.length === 0 ? (
                         <p className="text-center text-[var(--text-g)]">Ничего не найдено</p>
